@@ -158,7 +158,7 @@ export async function sendFaucetToken(req, res) {
   console.log(address, req.body);
   try {
     const provider = new ethers.providers.JsonRpcProvider(
-      "http://localhost:9951"
+      "https://sem-live.appworkdemo.com/archive"
     );
     const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
     const amountToSend = ethers.utils.parseEther("1");

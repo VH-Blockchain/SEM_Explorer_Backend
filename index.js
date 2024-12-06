@@ -86,7 +86,7 @@ export const verifyKey = async (req, res, next) => {
 app.use("/internal", internal);
 app.use("/api", api);
 app.use("/user", UserAuth.default);
-app.use("/apiauth", verifyKey, apiLimiter, dailyLimiter, apiKeyRoute);
+app.use("/apiauth",apiKeyRoute);
 
 app.get("*/:name", function (req, res) {
   res.send(`404  ${req.params.name} Route Not Found!`);

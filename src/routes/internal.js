@@ -118,7 +118,7 @@ internal.get("/address/:address", (req, res) => {
   // let page, limit;
   try {
     const page = req.query.page != undefined ? req.query.page : 1;
-    const limit = req.query.limit != undefined ? req.query.limit : 10;
+    const limit = req.query.limit != undefined ? req.query.limit : 20;
 
     const offset = (page - 1) * limit;
     getdatabyaddress(page, limit, offset, req.params.address).then((result) => {
@@ -149,7 +149,7 @@ internal.get("/subscriptions", async function (req, res) {
 internal.get("/providers", async function (req, res) {
   try {
     const provider = new ethers.providers.JsonRpcProvider(
-      "http://localhost:9951"
+      "https://sem-live.appworkdemo.com/archive"
     );
     return ApiResponse.successResponseWithData(
       res,

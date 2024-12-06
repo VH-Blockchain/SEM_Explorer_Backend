@@ -7,7 +7,9 @@ const app = express();
 // const provider = new ethers.providers.JsonRpcProvider(
 //   "http://b4hit-l1-node-backend.appworkdemo.com/archive"
 // );
-const provider = new ethers.providers.JsonRpcProvider("http://localhost:9951");
+const provider = new ethers.providers.JsonRpcProvider(
+  "https://sem-live.appworkdemo.com/archive"
+);
 // console.log(provider, "provider");
 // // Connect to the database
 // connection.connect(function (error) {
@@ -116,7 +118,7 @@ async function insertTransactionData() {
       const filteredValues = values.filter(
         (value) => typeof value !== "function"
       );
-      console.log(filteredValues, "filteredValues");
+      console.log(filteredValues, "filteredValues", formattedDate, "timestamp");
       const data = blockWithTransactions.transactions[index].hasOwnProperty(
         "maxPriorityFeePerGas"
       )

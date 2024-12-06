@@ -6,7 +6,7 @@ import { Web3 } from "web3";
 
 export async function getApiKey(req, res) {
   const provider = new ethers.providers.JsonRpcProvider(
-    "https://goerli.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+    "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
   );
   const address = "0xEC38E7Edc6B6df0227283fE23ebA9d3B712a0C47";
   try {
@@ -57,7 +57,7 @@ export async function getSingleAddressBalance(req, res) {
   const address = req.query.address;
   if (module === "account" && action === "balance") {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://goerli.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+      "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
     );
     const balance = await provider.getBalance(address);
     const balanceInEth = ethers.utils.formatEther(balance);
@@ -77,7 +77,7 @@ export async function getMultipleAddressBalance(req, res) {
   const balances = [];
   if (module === "account" && action === "balancemulti") {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://goerli.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+      "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
     );
     for (const add of addressArray) {
       const trimmedAddress = add.trim();
@@ -93,7 +93,7 @@ export async function getMultipleAddressBalance(req, res) {
 
 export async function fetchInternalTransaction(req, res) {
   const provider = new ethers.providers.JsonRpcProvider(
-    "https://goerli.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+    "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
   );
   try {
     const transactionHash = req.query.transactionHash;
@@ -180,7 +180,7 @@ export async function getTransactionByAddress(req, res) {
 export async function getTokenTransferEvents(req, res) {
   try {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://goerli.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+      "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
     );
     const latestBlockNumber = await provider.getBlockNumber();
     const address = req.query.address;
