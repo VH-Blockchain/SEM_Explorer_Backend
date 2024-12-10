@@ -18,18 +18,21 @@ export const internal = Router();
 // Define a route to get blockchain blocks
 internal.get("/fetchBlocks", (req, res) => {
   let page, limit;
+  console.log("page", req.query.page);
   try {
-    if (
-      typeof req.query.page != undefined &&
-      typeof req.query.limit != undefined
-    ) {
-      // console.log("page", typeof req.query.page, "limit", typeof req.query.limit);
-      page = 1;
-      limit = 10;
-    } else {
-      page = req.query.page;
-      limit = req.query.limit;
-    }
+    // if (
+    //   typeof req.query.page != undefined &&
+    //   typeof req.query.limit != undefined
+    // ) {
+    //   // console.log("page", typeof req.query.page, "limit", typeof req.query.limit);
+    //   page = 1;
+    //   limit = 10;
+    // } else {
+    //   page = req.query.page;
+    //   limit = req.query.limit;
+    // }
+    page = parseInt(req.query.page, 10) || 1;  // Default to 1 if `page` is not provided
+    limit = parseInt(req.query.limit, 10) || 10;  // Default to 10 if `limit` is not provided
     const offset = (page - 1) * limit;
     blocks(page, limit, offset).then((result) => {
       return ApiResponse.successResponseWithData(
@@ -46,15 +49,18 @@ internal.get("/fetchBlocks", (req, res) => {
 // Define a route to get blockchain transactions
 internal.get("/txs", (req, res) => {
   let page, limit;
+  console.log("page", req.query.page, "limit", req.query.limit);
   try {
-    if (req.query.page == undefined && req.query.limit == undefined) {
-      page = 1;
-      limit = 10;
-    } else {
-      console.log("object");
-      page = req.query.page;
-      limit = req.query.limit;
-    }
+    // if (req.query.page == undefined && req.query.limit == undefined) {
+    //   page = 1;
+    //   limit = 10;
+    // } else {
+    //   console.log("object");
+    //   page = req.query.page;
+    //   limit = req.query.limit;
+    // }
+    page = parseInt(req.query.page, 10) || 1;  // Default to 1 if `page` is not provided
+    limit = parseInt(req.query.limit, 10) || 10;  // Default to 10 if `limit` is not provided
     const offset = (page - 1) * limit;
     fetchTransactions(page, limit, offset).then((result) => {
       return ApiResponse.successResponseWithData(
