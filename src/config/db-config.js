@@ -2,7 +2,7 @@ import mysql from "mysql";
 export const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  port: 3307,
+  port: 3306,
   password: "",
   database: "sem",
 });
