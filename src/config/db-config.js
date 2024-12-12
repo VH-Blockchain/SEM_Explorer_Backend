@@ -1,9 +1,9 @@
 import mysql from "mysql";
 export const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
+  host: "sem-scanner-db-rds.cdkm8k222x7p.us-east-1.rds.amazonaws.com",
+  user: "admin",
   port: 3306,
-  password: "",
+  password: "VhtS25562gts",
   database: "sem",
 });
 
