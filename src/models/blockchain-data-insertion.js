@@ -118,6 +118,8 @@ async function insertTransactionData() {
       const filteredValues = values.filter(
         (value) => typeof value !== "function"
       );
+
+      const gasPrice = blockWithTransactions.transactions[index].gasPrice.toString();
       console.log(filteredValues, "filteredValues", formattedDate, "timestamp");
       const data = blockWithTransactions.transactions[index].hasOwnProperty(
         "maxPriorityFeePerGas"
@@ -142,7 +144,7 @@ async function insertTransactionData() {
         "','" +
         filteredValues[7] +
         "','" +
-        filteredValues[8] +
+        gasPrice +
         "','" +
         filteredValues[9] +
         "','" +
