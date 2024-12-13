@@ -11,7 +11,7 @@ export const connection = mysql.createConnection({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME
 
-});
+});  N
 
 connection.connect(function (err) {
   if (err) {
