@@ -8,6 +8,10 @@ import * as ethers from "ethers";
  * @return {Object} - An object containing the age in years, days,
  *                    hours, minutes, and seconds
  */
+import dotenv from 'dotenv'
+
+dotenv.config();
+
 export function blockAgecalculator(blocktimestamp) {
     const date1 = new Date()
     // Calculate the time difference in milliseconds
@@ -46,7 +50,7 @@ blockAgecalculator("1222222")
  */
 async function fetchTransferData(transactionHash) {
     try {
-        const provider = new ethers.providers.JsonRpcProvider('https://mainnet.infura.io/v3/23a2b10c45d9443394e9d7feffa43e13');
+        const provider = new ethers.providers.JsonRpcProvider(process.env.MAINNET_INFURA_URL);
         const transaction = await provider.getTransaction(transactionHash);
         // console.log("Transaction Data", transaction);
         const data = transaction.data;
@@ -92,7 +96,7 @@ export async function fetchTransactionNameByTransactionHash(hexdata) {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `https://api.etherface.io/v1/signatures/hash/all/${hexdata}/1`,
+        url: `${process.env.ETHERFACE_URL}/signatures/hash/all/${hexdata}/1`,
         headers: {}
     };
 

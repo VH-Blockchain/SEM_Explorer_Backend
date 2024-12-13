@@ -5,7 +5,8 @@ import { ApiResponse } from "../utils/api-response.js";
 import { connection } from "../config/db-config.js";
 import { v4 as uuidv4 } from "uuid";
 import { ethers } from "ethers";
-
+import dotenv from 'dotenv'
+dotenv.config()
 export async function Login(req, res) {
   var { email, password } = req.body;
   try {
@@ -158,7 +159,7 @@ export async function sendFaucetToken(req, res) {
   console.log(address, req.body);
   try {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://sem-live.appworkdemo.com/archive"
+      process.env.REACT_APP_RCP_URL
     );
     const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
     const amountToSend = ethers.utils.parseEther("1");

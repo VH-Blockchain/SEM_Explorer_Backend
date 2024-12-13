@@ -3,12 +3,13 @@ import { ethers } from "ethers";
 import fs from "fs";
 import solc from "solc";
 import { Web3 } from "web3";
-
+import dotenv from 'dotenv'
+dotenv.config()
 export async function getApiKey(req, res) {
   const provider = new ethers.providers.JsonRpcProvider(
-    "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+    process.env.PROVIDER_KEY
   );
-  const address = "0xEC38E7Edc6B6df0227283fE23ebA9d3B712a0C47";
+  const address = process.env.PROVIDER_ADRESS
   try {
     let transferEvents = [];
     const latestBlockNumber = await provider.getBlockNumber();
@@ -57,7 +58,7 @@ export async function getSingleAddressBalance(req, res) {
   const address = req.query.address;
   if (module === "account" && action === "balance") {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+      process.env.PROVIDER_KEY
     );
     const balance = await provider.getBalance(address);
     const balanceInEth = ethers.utils.formatEther(balance);
@@ -77,7 +78,7 @@ export async function getMultipleAddressBalance(req, res) {
   const balances = [];
   if (module === "account" && action === "balancemulti") {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+      process.env.PROVIDER_KEY
     );
     for (const add of addressArray) {
       const trimmedAddress = add.trim();
@@ -93,7 +94,7 @@ export async function getMultipleAddressBalance(req, res) {
 
 export async function fetchInternalTransaction(req, res) {
   const provider = new ethers.providers.JsonRpcProvider(
-    "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+    process.env.PROVIDER_KEY
   );
   try {
     const transactionHash = req.query.transactionHash;
@@ -180,7 +181,7 @@ export async function getTransactionByAddress(req, res) {
 export async function getTokenTransferEvents(req, res) {
   try {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://sepolia.infura.io/v3/c699d17f7200444c8ffa9c281ed20452"
+      process.env.PROVIDER_KEY
     );
     const latestBlockNumber = await provider.getBlockNumber();
     const address = req.query.address;
