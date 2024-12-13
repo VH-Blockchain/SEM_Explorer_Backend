@@ -8,7 +8,7 @@ const app = express();
 //   "http://b4hit-l1-node-backend.appworkdemo.com/archive"
 // );
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://sem-live.appworkdemo.com/archive"
+  "https://rpc.semchain.org"
 );
 // console.log(provider, "provider");
 // // Connect to the database

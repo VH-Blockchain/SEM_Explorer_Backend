@@ -58,7 +58,7 @@ export async function verifySingleFileContract(req, res) {
   const output = JSON.parse(solc.compile(JSON.stringify(input)));
   const contractName = Object.keys(output.contracts.file)[0];
   const metadata = output.contracts.file[contractName].metadata;
-  const web3 = new Web3("https://sem-live.appworkdemo.com/archive");
+  const web3 = new Web3("https://rpc.semchain.org");
   solc.loadRemoteVersion(req.body.compilerVersion, async (err, solc) => {
     if (!err) {
       const compiledCode = solc.compile(JSON.stringify(input));
@@ -196,7 +196,7 @@ export async function verifyMultiFileContract(req, res) {
         console.log(deployedByteCode, "deployedByteCode \n\n");
 
         // Verification logic - compare bytecode with deployed bytecode on blockchain
-        const web3 = new Web3("https://sem-live.appworkdemo.com/archive"); // Initialize Web3 with your Infura endpoint
+        const web3 = new Web3("https://rpc.semchain.org"); // Initialize Web3 with your Infura endpoint
 
         // Get deployed bytecode from the blockchain
         const fetchedBytecode = await web3.eth.getCode(contractAddress);

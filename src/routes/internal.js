@@ -155,7 +155,7 @@ internal.get("/subscriptions", async function (req, res) {
 internal.get("/providers", async function (req, res) {
   try {
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://sem-live.appworkdemo.com/archive"
+      "https://rpc.semchain.org"
     );
     return ApiResponse.successResponseWithData(
       res,
