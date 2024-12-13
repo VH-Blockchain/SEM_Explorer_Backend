@@ -13,5 +13,5 @@ jobs:
               with:
                   host: '100.27.81.159'
                   username: 'ubuntu'
-                  key: ${{ secrets.SSHKEY }}
+                  key: ${{ secrets.SSHKEY2 }}
                   script: sudo sh /home/ubuntu/backend_sem.sh
