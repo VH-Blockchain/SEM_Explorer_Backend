@@ -2,7 +2,8 @@ import { connection } from "../config/db-config.js";
 import fs from "fs";
 import solc from "solc";
 import { Web3 } from "web3";
-
+import dotenv from 'dotenv'
+dotenv.config()
 function trimByteCode(bytecode) {
   const targetSubstring = "a2646970667358221220";
   const last22Characters = bytecode.slice(-22); // Get the last 22 characters
@@ -58,7 +59,7 @@ export async function verifySingleFileContract(req, res) {
   const output = JSON.parse(solc.compile(JSON.stringify(input)));
   const contractName = Object.keys(output.contracts.file)[0];
   const metadata = output.contracts.file[contractName].metadata;
-  const web3 = new Web3("https://sem-live.appworkdemo.com/archive");
+  const web3 = new Web3(process.env.REACT_APP_RCP_URL);
   solc.loadRemoteVersion(req.body.compilerVersion, async (err, solc) => {
     if (!err) {
       const compiledCode = solc.compile(JSON.stringify(input));
@@ -196,7 +197,7 @@ export async function verifyMultiFileContract(req, res) {
         console.log(deployedByteCode, "deployedByteCode \n\n");
 
         // Verification logic - compare bytecode with deployed bytecode on blockchain
-        const web3 = new Web3("https://sem-live.appworkdemo.com/archive"); // Initialize Web3 with your Infura endpoint
+        const web3 = new Web3(process.env.REACT_APP_RCP_URL); // Initialize Web3 with your Infura endpoint
 
         // Get deployed bytecode from the blockchain
         const fetchedBytecode = await web3.eth.getCode(contractAddress);

@@ -11,6 +11,9 @@ import redis from "redis";
 import RedisClient from "ioredis";
 import morgan from "morgan";
 import { temp } from "./src/models/blockchain-data-insertion.js";
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
@@ -27,8 +30,8 @@ List of APIs Available:
 
 redis
   .createClient({
-    host: "127.0.0.1",
-    port: 6379,
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
   })
   .connect()
   .then((e) => {
@@ -86,12 +89,12 @@ export const verifyKey = async (req, res, next) => {
 app.use("/internal", internal);
 app.use("/api", api);
 app.use("/user", UserAuth.default);
-app.use("/apiauth",apiKeyRoute);
+app.use("/apiauth", apiKeyRoute);
 
 app.get("*/:name", function (req, res) {
   res.send(`404  ${req.params.name} Route Not Found!`);
 });
 
-app.listen(3038, () => {
-  console.log(`Server is running on port 3038`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
 });
