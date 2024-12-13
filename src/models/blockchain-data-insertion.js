@@ -2,13 +2,16 @@ import { connection } from "../config/db-config.js";
 import express from "express";
 import cron from "node-cron";
 import * as ethers from "ethers";
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const app = express();
 // const provider = new ethers.providers.JsonRpcProvider(
 //   "http://b4hit-l1-node-backend.appworkdemo.com/archive"
 // );
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://sem-live.appworkdemo.com/archive"
+  process.env.REACT_APP_RCP_URL
 );
 // console.log(provider, "provider");
 // // Connect to the database
@@ -224,7 +227,7 @@ function convertUnixTimestampToDate(unixTimestamp) {
   const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day
     .toString()
     .padStart(2, "0")} ${hour.toString().padStart(2, "0")}:${minute
-    .toString()
-    .padStart(2, "0")}:${second.toString().padStart(2, "0")}`;
+      .toString()
+      .padStart(2, "0")}:${second.toString().padStart(2, "0")}`;
   return formattedDate;
 }
