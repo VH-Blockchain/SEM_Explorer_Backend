@@ -22,10 +22,11 @@ export function blocks(page, limit, offset) {
     const limits = 1000;
     // Execute a SQL query to select all rows from the 'blocks' table, ordered by 'number'
     const totalPageData = await getTableCount("blocks");
-    const totalpage = Math.ceil(totalPageData[0]?.count / limits);
+    console.log(totalPageData);
+    const totalpage = Math.ceil(totalPageData[0]?.count / limit);
     connection.query(
       "SELECT * FROM blocks ORDER BY number DESC limit " +
-        limits +
+      limit +
         " offset " +
         offset +
         "",
